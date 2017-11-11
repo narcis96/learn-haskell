@@ -47,7 +47,7 @@ prop_count x a = (countGreater x a) == (countGreaterRec x a)
 
 
 multDigits :: String -> Int
-multDigits s = foldr (*) 1 [digitToInt x | x <- s, isAlpha x]
+multDigits s = foldr1 (*) [digitToInt x | x <- s, isAlpha x]
 
 capitalise :: String -> String
 capitalise s = toUpper(head s):[] ++ [toLower(x) | x <- tail s]
@@ -108,7 +108,7 @@ reverseEven li = map reverse (filter (\str -> even (length str)) li)
 concatFold a = foldr (\li elem -> li ++ elem) [] a
 
 myAll pred li = length (filter (==True) (map pred li) ) == length li
-myAll2 pred li = foldr (&&) True (map pred li)
+myAll2 pred li = foldr1 (&&) (map pred li)
 
 uniform (x:xs) = myAll2 (==x) xs
 
